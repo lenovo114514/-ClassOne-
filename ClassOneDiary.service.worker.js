@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1759470876|1948207601';
+const CACHE_VERSION = '1759480955|12027509079';
 /** @type {string} */
 const CACHE_PREFIX = '日志Class One-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
