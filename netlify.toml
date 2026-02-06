@@ -1,17 +1,49 @@
-# netlify.toml
+# netlify.toml - 增强版
 [build]
   publish = "."
+  command = ""  # 明确指定无构建命令
 
-# 为.pck文件添加正确的MIME类型
+[build.environment]
+  # Godot相关环境变量（如果需要）
+  NODE_VERSION = "18"
+
+# 必须的MIME类型设置
 [[headers]]
   for = "/*.pck"
   [headers.values]
     Content-Type = "application/octet-stream"
-    Cache-Control = "public, max-age=31536000"
-
-# 允许跨域访问（重要！）
-[[headers]]
-  for = "/*"
-  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Headers = "*"
+    Content-Disposition = "inline"
+
+[[headers]]
+  for = "/*.wasm"
+  [headers.values]
+    Content-Type = "application/wasm"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+    Access-Control-Allow-Origin = "*"
+
+# 确保所有Godot文件可访问
+[[headers]]
+  for = "/ClassOneDiary.*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Expose-Headers = "Content-Length"
+
+# 禁用某些文件的压缩（Godot文件可能被破坏）
+[[headers]]
+  for = "/*.pck"
+  [headers.values]
+    Content-Encoding = "identity"
+
+# 重定向规则（可选）
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
