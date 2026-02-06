@@ -1,0 +1,17 @@
+# netlify.toml
+[build]
+  publish = "."
+
+# 为.pck文件添加正确的MIME类型
+[[headers]]
+  for = "/*.pck"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+    Cache-Control = "public, max-age=31536000"
+
+# 允许跨域访问（重要！）
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "*"
